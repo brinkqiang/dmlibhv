@@ -7,7 +7,7 @@ INCLUDE(cmake/ModuleImport.cmake)
 INCLUDE(cmake/ModuleCompileOptions.cmake)
 #ModuleSetCompileOptions()
 
-option(BUILD_SHARED "build shared library" ON)
+option(BUILD_SHARED "build shared library" OFF)
 option(BUILD_STATIC "build static library" ON)
 
 option(BUILD_EXAMPLES "build examples" ON)
@@ -92,8 +92,8 @@ else()
     add_definitions(-DNDEBUG)
 endif()
 
-#add_definitions(-DHV_STATICLIB)
-add_definitions(-DHV_DYNAMICLIB)
+add_definitions(-DHV_STATICLIB)
+#add_definitions(-DHV_DYNAMICLIB)
 
 if(ENABLE_IPV6)
     add_definitions(-DENABLE_IPV6)
