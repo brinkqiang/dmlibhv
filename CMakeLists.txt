@@ -5,7 +5,7 @@ project(hv VERSION 1.2.3)
 LIST(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 INCLUDE(cmake/ModuleImport.cmake)
 INCLUDE(cmake/ModuleCompileOptions.cmake)
-#ModuleSetCompileOptions()
+ModuleSetCompileOptions()
 
 option(BUILD_SHARED "build shared library" OFF)
 option(BUILD_STATIC "build static library" ON)
