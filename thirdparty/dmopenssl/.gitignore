@@ -174,3 +174,5 @@ pod2htmd.tmp
 # Windows manifest files
 *.manifest
 /build/*
+/c_rehash
+/opensslconf.h.cmake.in

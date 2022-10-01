@@ -6,6 +6,10 @@
  * in the file LICENSE in the source distribution or at
  * https://www.openssl.org/source/license.html
  */
+#define OPENSSL_NO_MD2
+#define OPENSSL_NO_RC5
+#define OPENSSL_NO_RFC3779
+#define OPENSSL_NO_EC_NISTP_64_GCC_128
 
 #include <openssl/opensslv.h>
 

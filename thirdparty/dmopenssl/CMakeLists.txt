@@ -26,7 +26,7 @@
 
 set( CMAKE_LEGACY_CYGWIN_WIN32 0 )
 project( openssl )
-cmake_minimum_required( VERSION 3.1.0 )
+cmake_minimum_required( VERSION 3.8 )
 
 LIST(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 INCLUDE(cmake/ModuleImport.cmake)
@@ -34,10 +34,8 @@ INCLUDE(cmake/ModuleCompileOptions.cmake)
 ModuleSetCompileOptions()
 
 
-set( CMAKE_DISABLE_SOURCE_CHANGES ON )
-set( CMAKE_DISABLE_IN_SOURCE_BUILD ON )
-
-set( CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" )
+#set( CMAKE_DISABLE_SOURCE_CHANGES ON )
+#set( CMAKE_DISABLE_IN_SOURCE_BUILD ON )
 
 option( WITH_APPS "Build applications" ON )
 
@@ -163,6 +161,8 @@ if( MSVC OR ( WIN32 AND MINGW AND NOT CYGWIN ) )
 endif()
 
 # Begin configure public headers
+
+
 file( COPY ${CMAKE_CURRENT_SOURCE_DIR}/include/internal DESTINATION include )
 file( COPY ${CMAKE_CURRENT_SOURCE_DIR}/include/crypto DESTINATION include )
 file( COPY ${CMAKE_CURRENT_SOURCE_DIR}/include/openssl DESTINATION include )
@@ -174,10 +174,9 @@ set( CONF "
 #define OPENSSL_NO_RFC3779
 #define OPENSSL_NO_EC_NISTP_64_GCC_128
 ${CONF}" )
-file( WRITE ${CMAKE_CURRENT_SOURCE_DIR}/opensslconf.h.cmake "${CONF}" )
+file( WRITE ${CMAKE_CURRENT_SOURCE_DIR}/opensslconf.h.cmake.in "${CONF}" )
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/opensslconf.h.cmake.in ${CMAKE_CURRENT_SOURCE_DIR}/include/openssl/opensslconf.h )
 
-configure_file( ${CMAKE_CURRENT_SOURCE_DIR}/opensslconf.h.cmake
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/openssl/opensslconf.h )
 # End configure public headers
 
 add_subdirectory(crypto)
