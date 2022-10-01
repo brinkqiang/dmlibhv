@@ -29,13 +29,14 @@ option(USE_MULTIMAP "MultiMap" OFF)
 option(WITH_CURL "with curl library" OFF)
 option(WITH_NGHTTP2 "with nghttp2 library" OFF)
 
-option(WITH_OPENSSL "with openssl library" OFF)
+option(WITH_OPENSSL "with openssl library" ON)
 option(WITH_GNUTLS  "with gnutls library"  OFF)
 option(WITH_MBEDTLS "with mbedtls library" OFF)
 
 option(WITH_KCP "with kcp" OFF)
 
-set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake;${CMAKE_MODULE_PATH}")
+ModuleImport("dmopenssl" "thirdparty/dmopenssl")
+
 include(utils)
 include(vars)
 
