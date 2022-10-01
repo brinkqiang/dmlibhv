@@ -37,13 +37,13 @@ ModuleSetCompileOptions()
 set( CMAKE_DISABLE_SOURCE_CHANGES ON )
 set( CMAKE_DISABLE_IN_SOURCE_BUILD ON )
 
-set( CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" )
+set( CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" )
 
 option( WITH_APPS "Build applications" ON )
 
 # OpenSSL version detection imported from FindOpenSSL.cmake
 
-file( STRINGS "${PROJECT_SOURCE_DIR}/include/openssl/opensslv.h" openssl_version_str
+file( STRINGS "${CMAKE_CURRENT_SOURCE_DIR}/include/openssl/opensslv.h" openssl_version_str
   REGEX "^#[\t ]*define[\t ]+OPENSSL_VERSION_NUMBER[\t ]+0x([0-9a-fA-F])+.*" )
 
 function(from_hex HEX DEC)
@@ -163,11 +163,11 @@ if( MSVC OR ( WIN32 AND MINGW AND NOT CYGWIN ) )
 endif()
 
 # Begin configure public headers
-file( COPY ${PROJECT_SOURCE_DIR}/include/internal DESTINATION include )
-file( COPY ${PROJECT_SOURCE_DIR}/include/crypto DESTINATION include )
-file( COPY ${PROJECT_SOURCE_DIR}/include/openssl DESTINATION include )
+file( COPY ${CMAKE_CURRENT_SOURCE_DIR}/include/internal DESTINATION include )
+file( COPY ${CMAKE_CURRENT_SOURCE_DIR}/include/crypto DESTINATION include )
+file( COPY ${CMAKE_CURRENT_SOURCE_DIR}/include/openssl DESTINATION include )
 
-file( READ ${PROJECT_SOURCE_DIR}/opensslconf.h.cmake CONF )
+file( READ ${CMAKE_CURRENT_SOURCE_DIR}/opensslconf.h.cmake CONF )
 set( CONF "
 #define OPENSSL_NO_MD2
 #define OPENSSL_NO_RC5
@@ -187,7 +187,7 @@ if(WITH_APPS AND NOT ANDROID AND NOT IOS)
   add_subdirectory(apps)
 endif()
 
-file( READ ${PROJECT_SOURCE_DIR}/c_rehash.cmake C_REHASH )
+file( READ ${CMAKE_CURRENT_SOURCE_DIR}/c_rehash.cmake C_REHASH )
 string( REPLACE "@OPENSSLDIR@" "${OPENSSLDIR}" C_REHASH "${C_REHASH}" )
 string( REPLACE "@CMAKE_INSTALL_PREFIX@" "${CMAKE_INSTALL_PREFIX}" C_REHASH "${C_REHASH}" )
 file( WRITE ${PROJECT_BINARY_DIR}/c_rehash "${C_REHASH}" )
