@@ -174,10 +174,10 @@ set( CONF "
 #define OPENSSL_NO_RFC3779
 #define OPENSSL_NO_EC_NISTP_64_GCC_128
 ${CONF}" )
-file( WRITE ${PROJECT_BINARY_DIR}/opensslconf.h.cmake "${CONF}" )
+file( WRITE ${CMAKE_CURRENT_SOURCE_DIR}/opensslconf.h.cmake "${CONF}" )
 
-configure_file( ${PROJECT_BINARY_DIR}/opensslconf.h.cmake
-  ${PROJECT_BINARY_DIR}/include/openssl/opensslconf.h )
+configure_file( ${CMAKE_CURRENT_SOURCE_DIR}/opensslconf.h.cmake
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/openssl/opensslconf.h )
 # End configure public headers
 
 add_subdirectory(crypto)
@@ -190,13 +190,13 @@ endif()
 file( READ ${CMAKE_CURRENT_SOURCE_DIR}/c_rehash.cmake C_REHASH )
 string( REPLACE "@OPENSSLDIR@" "${OPENSSLDIR}" C_REHASH "${C_REHASH}" )
 string( REPLACE "@CMAKE_INSTALL_PREFIX@" "${CMAKE_INSTALL_PREFIX}" C_REHASH "${C_REHASH}" )
-file( WRITE ${PROJECT_BINARY_DIR}/c_rehash "${C_REHASH}" )
+file( WRITE ${CMAKE_CURRENT_SOURCE_DIR}/c_rehash "${C_REHASH}" )
 
-file( GLOB PUBLIC_HEADERS "${PROJECT_BINARY_DIR}/include/openssl/*.h" )
+file( GLOB PUBLIC_HEADERS "${CMAKE_CURRENT_SOURCE_DIR}/include/openssl/*.h" )
 install( FILES ${PUBLIC_HEADERS} DESTINATION include/openssl )
 
 install( FILES
-  ${PROJECT_BINARY_DIR}/c_rehash
+  ${CMAKE_CURRENT_SOURCE_DIR}/c_rehash
   FAQ LICENSE README README.ENGINE
   DESTINATION share/openssl )
 
